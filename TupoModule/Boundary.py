@@ -70,7 +70,6 @@ class Boundary(Fighter):
 
                     # 检测游戏结果
                     res = self.check_result()
-                    print(res)
                     if res == -1:
                         # 超时退出游戏
                         self.game_control.quit_game()
@@ -105,7 +104,6 @@ class Boundary(Fighter):
                     # 等待下一轮
                     self.game_control.wait_game_img(ImgPath.get_img_file_path() + ImgPath.JIE_JIE_TU_PO, 10)
                     logging.info(self.name + '回到结界突破页面')
-
                     is_end = True
 
                 else:

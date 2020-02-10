@@ -37,7 +37,5 @@ class ExplorePassenger(Fighter):
                              *CommonPos.JIE_SUAN_SECOND_POS_RECT, appear=False)
 
 
-
-
     def stop(self):
         self.run.stop()
