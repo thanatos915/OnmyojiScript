@@ -15,7 +15,7 @@ class GlobalProperty:
     passenger_num = 1
 
     # 系统缩放比例 125%或者100%
-    window_resize_resolution = 1.25
+    window_resize_resolution = 1
 
     # 1级N卡所在的大概位置，按百分比计算
     n_ka_slider_value = 20

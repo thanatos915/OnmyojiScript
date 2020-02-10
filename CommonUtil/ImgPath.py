@@ -15,6 +15,8 @@ ZI_DONG = 'ZI-DONG.png'
 YOU_JIAN = 'MESSAGE.png'
 # 战斗开始时候的准备按钮
 ZHUN_BEI='ZHUN-BEI.png'
+SHI_BAI = 'SHI-BAI.png'
+SHENG_LI = 'SHENG-LI.png'
 # ---------------御魂部分--------------------------
 
 KAI_SHI_ZHAN_DOU = 'KAI-SHI-ZHAN-DOU.png'
@@ -51,6 +53,13 @@ EXPLORE_QUIT='QUIT.png'
 EXPLORE_JIE_SHOU='TAN-SUO-JIE-SHOU.png'
 
 JIN_RU_ZHAN_DOU='JIN-RU-ZHAN-DOU.png'
+
+# ---------------探索部分--------------------------
+JIE_JIE_TU_PO = 'JIE-JIE-TU-PO.png'
+TU_PO = 'TU-PO.png'
+PO = 'PO.png'
+JIN_GONG = 'JIN-GONG.png'
+YIN_BI = 'YIN-BI.png'
 
 
 def get_img_file_path():

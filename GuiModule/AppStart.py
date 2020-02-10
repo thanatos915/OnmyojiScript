@@ -24,6 +24,7 @@ from YuHunModule.YuHunDriver import YuHunDriver
 from YuHunModule.YuHunPassenger import YuHunPassenger
 from YuHunModule.YuHunThreePerson import YuHunThreePerson
 from YuHunModule.YuHunTwoPerson import YuHunTwoPerson
+from TupoModule.Boundary import Boundary
 
 
 from GuiModule.MainWindow import Ui_MainWindow
@@ -53,9 +54,13 @@ class AppStart(QMainWindow):
         初始化一些游戏参数
         :return:
         """
+
+        # mark_index = 1
+        # mark_shis_shen = self.ui.need_mark_shi_shen.isChecked() or self.ui.tu_need_mark_shi_shen.isChecked()
+        # mark_index = self.ui.mark_shi_shen_pos_index.value() or
         GlobalProperty.need_mark_shi_shen = self.ui.need_mark_shi_shen.isChecked()
         GlobalProperty.mark_shi_shen_index = self.ui.mark_shi_shen_pos_index.value()
-        GlobalProperty.n_ka_slider_value=self.ui.n_ka_slider.value()
+        GlobalProperty.n_ka_slider_value = self.ui.n_ka_slider.value()
         if self.ui.system_resize_resolution.currentIndex() == 0:
             logging.info('当前系统缩放比例为{}'.format(self.ui.system_resize_resolution.itemText(0)))
             GlobalProperty.window_resize_resolution = 1.25
@@ -76,7 +81,8 @@ class AppStart(QMainWindow):
         self.init_property()
         CommonPos.InitCommonPosWithSystemResolution()
         # 判断当前选项
-        if self.ui.page.currentIndex() == 0:
+        current_page = self.ui.page.currentIndex()
+        if current_page == 0:
             # 御魂
             if self.ui.yuhun_single.isChecked():
                 # todo
@@ -109,7 +115,7 @@ class AppStart(QMainWindow):
                 GlobalProperty.passenger_num = 2
                 self.fighter = YuHunThreePerson()
                 is_running = self.fighter.start()
-        elif self.ui.page.currentIndex() == 1:
+        elif current_page == 1:
             # 探索界面
             # self.fighter = ExploreTwoPerson()
             logging.info('探索-组队乘客模式启动')
@@ -124,6 +130,16 @@ class AppStart(QMainWindow):
             # task2 = threading.Thread(target=self.fighter2.start)
             # task2.start()
             is_running=True
+        elif current_page == 3:
+            # 结界突破
+            is_running = True
+            hwndlist = GameWindow.get_game_hwnd()
+            for item in hwndlist:
+                print(item)
+                self.fighter = Boundary(item)
+                task1 = threading.Thread(target=self.fighter.start)
+                task1.start()
+
 
         if is_running:
             self.state.start()

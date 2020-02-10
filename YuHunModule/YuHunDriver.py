@@ -48,40 +48,8 @@ class YuHunDriver(Fighter):
             if self.run.is_running() is False:
                 return False
 
-            # 需要手动标记式神
-            if GlobalProperty.need_mark_shi_shen is True:
-                # 等待标记式神位置
-                self.game_control.wait_game_img(ImgPath.get_img_file_path() + ImgPath.ZI_DONG)
-                time.sleep(1)
-                if GlobalProperty.mark_shi_shen_index == 1:
-                    self.game_control.mouse_click_bg(pos=(130,455))
-                    # pyautogui.moveTo((130,455),duration=0.20)
-                    # cv2.circle(test,(135,425),10,(255,0,0),5)
-                elif GlobalProperty.mark_shi_shen_index == 2:
-                    self.game_control.mouse_click_bg(pos=(324,446))
-                    # cv2.circle(test,(324,446),10,(255,0,0),5)
-                    # pyautogui.moveTo((324,446),duration=0.20)
-
-
-                elif GlobalProperty.mark_shi_shen_index == 3:
-                    self.game_control.mouse_click_bg(pos=(527,462))
-                    # pyautogui.moveTo((527,462),duration=0.20)
-
-                    # cv2.circle(test,(527,445),10,(255,0,0),5)
-
-                elif GlobalProperty.mark_shi_shen_index == 4:
-                    self.game_control.mouse_click_bg(pos=(739,447))
-                    # cv2.circle(test,(739,447),10,(255,0,0),5)
-
-                elif GlobalProperty.mark_shi_shen_index == 5:
-                    self.game_control.mouse_click_bg(pos=(930, 440))
-                    # cv2.circle(test,(930, 440),10,(255,0,0),5)
-
-                else:
-                    logging.error('标记式神失败，当前需要标记式神位置为{}'.format(GlobalProperty.mark_shi_shen_index))
-                logging.info('成功标记式神')
-                # cv2.imwrite('mark_pos_img_res.jpg',test)
-
+            # 开始标记式神
+            self.mark_shishen()
 
             if self.run.is_running() is False:
                 return False
@@ -89,7 +57,7 @@ class YuHunDriver(Fighter):
             # 等待游戏结算
             self.wait_fight_end()
 
-            self.random_timer_level_one.sleep_random_time()
+            self.sleep_random_time()
 
             # 点击第一次结算
             self.click_until('第一次结算', ImgPath.get_img_file_path() + ImgPath.JIN_BI,
@@ -97,13 +65,15 @@ class YuHunDriver(Fighter):
             # logging.info('司机点击了第一次结算的位置{}'.format(CommonPosition.JIE_SUAN_FIRST_POS))
             if self.run.is_running() is False:
                 return False
-            self.random_timer_level_one.sleep_random_time()
+
+            self.sleep_random_time()
 
             # 点击第二次结算
             self.click_until('第二次结算', ImgPath.get_img_file_path() + ImgPath.JIN_BI,
                              *CommonPos.JIE_SUAN_SECOND_POS_RECT, appear=False)
             if self.run.is_running() is False:
                 return False
+
             # 等待下一轮,顺便要检查自动邀请队友
             logging.info('司机等待下一轮')
             start_time = time.time()
@@ -118,7 +88,7 @@ class YuHunDriver(Fighter):
                     self.game_control.mouse_click_bg(CommonPos.ZI_DONG_YAO_QING_FIRST_POS)
                     time.sleep(0.2)
                     self.game_control.mouse_click_bg(CommonPos.ZI_DONG_YAO_QING_SECOND_POS)
-                    logging.info('司机自动邀请自动邀请')
+                    logging.info('司机自动邀请')
 
     def stop(self):
         self.run.stop()
