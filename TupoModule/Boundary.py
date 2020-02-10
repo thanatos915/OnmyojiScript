@@ -23,6 +23,7 @@ class Boundary(Fighter):
     def __init__(self, hwnd=0):
         # 初始化
         Fighter.__init__(self, 'Boundary: ', hwnd)
+        self.section = 2
 
     def start_fight(self, pos):
         """

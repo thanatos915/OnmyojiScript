@@ -135,7 +135,6 @@ class AppStart(QMainWindow):
             is_running = True
             hwndlist = GameWindow.get_game_hwnd()
             for item in hwndlist:
-                print(item)
                 self.fighter = Boundary(item)
                 task1 = threading.Thread(target=self.fighter.start)
                 task1.start()

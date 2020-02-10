@@ -60,7 +60,6 @@ class Fighter:
             :param mode 标记场景类型 1：御魂 2: 突破
         """
         # 标记式神
-        GlobalProperty.need_mark_shi_shen
         isMark = GlobalProperty.need_mark_shi_shen
         markIndex = GlobalProperty.mark_shi_shen_index
         if isMark and markIndex > 0:
